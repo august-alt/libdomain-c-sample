@@ -21,7 +21,7 @@ git clone https://github.com/libdomain/libdomain-c-sample
 Используйте следующую команду компиляции:
 
 ```bash
-mkdir build && cd build && cmake .. && make -j `nproc`
+cd libdomain-c-sample && mkdir build && cd build && cmake .. && make -j `nproc`
 ```
 
 ## Использование
