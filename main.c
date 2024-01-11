@@ -63,7 +63,7 @@ static struct argp_option options[] =
     { "host", 'h', "HOST", 0, "Host. Use protocol://adress:port format e.g. ldap://dc.example.org:389."},
     { "user", 'u', "USER", 0, "User name."},
     { "pass", 'w', "PASS", 0, "Password."},
-    { "sasl", 's', "SASL", 0, "Whether or not use SASL bind."},
+    { "sasl", 's', 0, 0, "Whether or not use SASL bind."},
     { "bind", 'b', "BIND", 0, "Bind dn. For example: \"dc=example,dc=org\"."},
     { 0 }
 };
