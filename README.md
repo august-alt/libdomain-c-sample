@@ -9,7 +9,7 @@ The provided example is a C program that demonstrates the use of the libdomain l
 To compile the program, you need to install the libdomain library.
 
 ```bash
-apt-get install git cmake make gcc libdomain-devel libconfig-devel
+apt-get install git cmake make gcc krb5-kinit libdomain-devel libconfig-devel
 ```
 
 Clone the example:
@@ -25,12 +25,16 @@ cd libdomain-c-sample && mkdir build && cd build && cmake .. && make -j `nproc`
 ```
 
 ## Usage
+The program takes command-line arguments to specify the connection parameters to the LDAP server and the search parameters. For this example, we assume that we have deployed a testbed based on Samba DC called `dc` in the domain `example.org`, in which the LDAP service is running on port 389.
 
-The program takes command-line arguments to specify LDAP server connection parameters and search parameters.
-In example below we assume that user has Samba DC server `dc` in domain named `example.org` running on port 389.
-It's virtually impossible to account for every possible variation of LDAP server setup, so please chek parameters you pass 
-for this sample application and adjust them according to your specific environment settings.
-To run sample you can use following command:
+Make sure that you use the correct connection data, such as username and password, etc. If the domain name or LDAP service is different, you may need to change the parameters passed to the example in accordance with the settings of the LDAP service.
+
+Samba and Windows Active Directory can support Kerberos authentication depending on the configuration. If the server supports GSSAPI and Kerberos, make sure that you have passed the "--sasl" parameter. In this case, you may also need to generate a Kerberos ticket to do this, you may need to run the kinit command.
+
+```bash
+kinit administrator@example.org
+```
+To run sample execute following command from `build` directory:
 
 ```bash
 ./libdomain-c-sample --host ldap://dc.example.org:389 --user administrator --pass password --bind "dc=example,dc=org" --sasl
