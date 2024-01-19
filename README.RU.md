@@ -10,7 +10,7 @@
 Для компиляции программы необходимо установить библиотеку libdomain.
 
 ```bash
-apt-get install libdomain-devel libconfig-devel
+apt-get install git cmake make gcc krb5-kinit libdomain-devel libconfig-devel
 ```
 
 Склонируйте пример:
@@ -27,6 +27,17 @@ cd libdomain-c-sample && mkdir build && cd build && cmake .. && make -j `nproc`
 ## Использование
 
 Программа принимает аргументы командной строки для указания параметров соединения с сервером LDAP и параметров поиска.
+Для этого примера мы предполагаем что у нас развёрнут тестовый стенд на основе Samba DC названием `dc` в домене `example.org`,
+в котором LDAP сервис работает на порту 389. 
+
+Убедитесь что используете правильные данные для подключения, такие как имя пользователя и пароль и.т.д. В случае если имя домена или сервис LDAP отличаются вам может потребоваться изменить параметры передаваемые примеру в соответствии с настройками сервиса LDAP.
+
+Samba и Windows Active Directory могут поддерживать аутентификацию Kerberos в зависимости от конфигурации. Если сервер поддерживает GSSAPI и Kerberos, убедитесь, что вы выбираете флажок "Interactive bind/SASL/GSSAPI". В этом случае вам также может потребоваться сгенерировать билет Kerberos для этого может потребоваться выполнить команду kinit.
+
+```bash
+kinit administrator@example.org
+```
+Для запуска примера выполните:
 
 ```bash
 ./libdomain-c-sample --host ldap://dc.example.org:389 --user administrator --pass password --bind "dc=example,dc=org" --sasl
