@@ -9,7 +9,7 @@ The provided example is a C program that demonstrates the use of the libdomain l
 To compile the program, you need to install the libdomain library.
 
 ```bash
-apt-get install libdomain-devel libconfig-devel
+apt-get install git cmake make gcc libdomain-devel libconfig-devel
 ```
 
 Clone the example:
@@ -27,6 +27,10 @@ cd libdomain-c-sample && mkdir build && cd build && cmake .. && make -j `nproc`
 ## Usage
 
 The program takes command-line arguments to specify LDAP server connection parameters and search parameters.
+In example below we assume that user has Samba DC server `dc` in domain named `example.org` running on port 389.
+It's virtually impossible to account for every possible variation of LDAP server setup, so please chek parameters you pass 
+for this sample application and adjust them according to your specific environment settings.
+To run sample you can use following command:
 
 ```bash
 ./libdomain-c-sample --host ldap://dc.example.org:389 --user administrator --pass password --bind "dc=example,dc=org" --sasl
